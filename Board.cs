@@ -42,9 +42,14 @@ public class Board
             return false;
         else 
         {
-            map[pos2[0], pos2[1]] = map[pos1[0], pos1[1]];
-            map[pos1[0], pos1[1]] = null;
-            return true;
+            if(map[pos1[0], pos1[1]].CheckMove(pos1, pos2, false, map))
+            {
+                map[pos2[0], pos2[1]] = map[pos1[0], pos1[1]];
+                map[pos1[0], pos1[1]] = null;
+                return true;
+            }
+            else
+                return false;
         }
     }
 

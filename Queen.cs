@@ -13,7 +13,7 @@ public class Queen:Piece
         this.points = 10;
     }
 
-    override public bool CheckMove()
+    override public bool CheckMove(int[] pos1, int[] pos2, bool capture, Piece[,] map)
     {
         return true;
     }

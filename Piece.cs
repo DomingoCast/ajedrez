@@ -5,7 +5,7 @@ public abstract class Piece
     protected string color;
     protected int points;
 
-    public abstract bool CheckMove();
+    public abstract bool CheckMove(int[] pos1, int[] pos2, bool capture, Piece[,] map);
 
     public abstract override string ToString();
     public string GetName()

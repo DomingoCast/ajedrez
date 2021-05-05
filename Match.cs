@@ -10,7 +10,7 @@ public class Match
         bool error = false;
         while(true)
         {
-            Console.Clear();
+            //Console.Clear();
             if(error)
             {
                 Console.WriteLine("Ilegal move");

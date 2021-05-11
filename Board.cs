@@ -4,6 +4,8 @@ public class Board
     private Piece[,] map;
     private Piece[] whitePieces;
     private Piece[] blackPieces;
+    int[] whiteKingPos;
+    int[] blackKingPos;
     public Board()
     {
         map = new Piece[8,8];
@@ -13,6 +15,9 @@ public class Board
         createPieces();
 
         fillBoard();
+
+        whiteKingPos = new int[2]{0, 5};
+        whiteKingPos = new int[2]{7, 5};
 
     }
 

@@ -1,16 +1,16 @@
 using System;
 public class Board
 {
-    protected Piece[,] map;
+    private Piece[,] map;
     public Board()
     {
         map = new Piece[8,8];
 
-        FillBoard();
+        fillBoard();
 
     }
 
-    public void FillBoard()
+    private void fillBoard()
     {
         for(int j = 0; j<8; j++)
         {
@@ -18,28 +18,30 @@ public class Board
             map[6,j] = new Pawn("black");
         }
         map[0,0] = new Rook("white");
-        map[0,1] = new Bishop("white");
-        map[0,2] = new Knight("white");
+        map[0,1] = new Knight("white");
+        map[0,2] = new Bishop("white");
         map[0,3] = new Queen("white");
         map[0,4] = new King("white");
-        map[0,5] = new Knight("white");
-        map[0,6] = new Bishop("white");
+        map[0,5] = new Bishop("white");
+        map[0,6] = new Knight("white");
         map[0,7] = new Rook("white");
         
         map[7,0] = new Rook("black");
-        map[7,1] = new Bishop("black");
-        map[7,2] = new Knight("black");
+        map[7,1] = new Knight("black");
+        map[7,2] = new Bishop("black");
         map[7,3] = new Queen("black");
         map[7,4] = new King("black");
-        map[7,5] = new Knight("black");
-        map[7,6] = new Bishop("black");
+        map[7,5] = new Bishop("black");
+        map[7,6] = new Knight("black");
         map[7,7] = new Rook("black");
     }
 
     public bool Move(int[] pos1, int[] pos2, string color)
     {
-        if(map[pos1[0], pos1[1]] is null || map[pos1[0], pos1[1]].GetColor() != color)
-            return false;
+        //if(map[pos1[0], pos1[1]] is null || map[pos1[0], pos1[1]].GetColor() != color)
+            //return false;
+        if(false)
+            Console.Write("ESTO ES UNA PRUEBA PARA PODER MOVER");
         else 
         {
             if(map[pos1[0], pos1[1]].CheckMove(pos1, pos2, false, map))

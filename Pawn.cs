@@ -5,7 +5,7 @@ public class Pawn:Piece
     //protected string state;
     //protected string color;
     //protected int points;
-    protected bool enPassant = false;
+    private bool enPassant = false;
 
     public Pawn(string color)
     {
@@ -17,6 +17,7 @@ public class Pawn:Piece
 
     override public bool CheckMove(int[] pos1, int[] pos2, bool capture, Piece[,] map)
     {
+        bool clearPath = ClearPath(pos1, pos2, map); //Comprobar si funciona
         int j = -1;
         if(color == "black")
             j = -j;
@@ -25,33 +26,22 @@ public class Pawn:Piece
         {
             return (pos1[1] == pos2[1] - 1 || pos1[1] == pos2[1] + 1) && pos1[0] == pos1[0] + j; //diagonal
         }
-        else
+        else if(clearPath)
         {
-            bool clearPath = true; //no hay nada en el camino
-            for(int i = pos1[0]+1; i<=pos2[0]; i++ )
-            {
-                Console.Write(i);
-                if(map[i, pos1[1]] is null)
-                {
-                    Console.WriteLine("NOTHING");
-                }
-                else
-                {
-                    Console.WriteLine("SOMETHING");
-                    clearPath = false;
-
-                }
-            }
 
             if(color == "white" && pos1[0] == 1 || color == "black" && pos1[0] == 6 ) //mov inicial
             {
-                return pos1[1] == pos2[1]  && (pos1[0] == pos2[0] + 2*j ||pos1[0] == pos2[0] + 1*j) && clearPath;
+                return pos1[1] == pos2[1]  && (pos1[0] == pos2[0] + 2*j ||pos1[0] == pos2[0] + 1*j);
             }
             else
             {
                 return pos1[0] == pos2[0] + j  && pos1[1] == pos2[1] && clearPath; // se mueve 1
 
             }
+        }
+        else
+        {
+            return false;
         }
     }
 

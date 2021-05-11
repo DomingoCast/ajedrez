@@ -1,3 +1,5 @@
+using System;
+
 public class King:Piece
 {
     //string name;
@@ -15,7 +17,12 @@ public class King:Piece
 
     override public bool CheckMove(int[] pos1, int[] pos2, bool capture, Piece[,] map)
     {
-        return true;
+        int dist1 = Math.Abs(pos1[0]-pos2[0]);
+        int dist2 = Math.Abs(pos1[1]-pos2[1]);
+        if((dist1 > 0 || dist2 > 0) && (dist1 <= 1 && dist2 <= 1))
+            return ClearPath(pos1, pos2, map);
+
+        return false;
     }
 
     public override string ToString()

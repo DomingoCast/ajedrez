@@ -14,7 +14,7 @@ public class Rook:Piece
     {
         if((pos1[0] == pos2[0] && pos1[1] != pos2[1]) || (pos1[1] == pos2[1] && pos1[0] != pos2[0]))
         {
-            if(ClearPath(pos1, pos2, map))
+            if(ClearPath(pos1, pos2, capture, map))
             {
                 hasMoved = true;
                 return true;

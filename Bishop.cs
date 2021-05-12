@@ -17,12 +17,9 @@ public class Bishop:Piece
     override public bool CheckMove(int[] pos1, int[] pos2, bool capture, Piece[,] map)
     {
         int dist = Math.Abs(pos1[0] - pos2[0]);
-        if(dist != 0 && ClearPath(pos1, pos2, map))
+        if(dist != 0 && Math.Abs(pos1[1] - pos2[1]) == dist && ClearPath(pos1, pos2, capture, map))
         {
-            if(Math.Abs(pos1[1] - pos2[1]) == dist)
-            {
-                return true;
-            }
+            return true;
         }
         return false;
     }

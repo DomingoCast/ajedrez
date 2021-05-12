@@ -16,7 +16,7 @@ public class Knight:Piece
     {
         int dist1 = Math.Abs(pos1[0]-pos2[0]);
         int dist2 = Math.Abs(pos1[1]-pos2[1]);
-        Console.WriteLine("CABALLITO"+dist1+" "+dist2);
+        
         if((dist1 == 2 && dist2 == 1) || (dist1 == 1 && dist2 == 2))
         {
             bool empty = map[pos2[0], pos2[1]] is null;

@@ -1,11 +1,11 @@
 using System;
+using System.Collections.Generic;
 public class Board
 {
     private Piece[,] map;
     private Piece[] whitePieces;
     private Piece[] blackPieces;
-    int[] whiteKingPos;
-    int[] blackKingPos;
+    Dictionary<string, int[]> kingPos;
     public Board()
     {
         map = new Piece[8,8];
@@ -16,8 +16,10 @@ public class Board
 
         fillBoard();
 
-        whiteKingPos = new int[2]{0, 5};
-        whiteKingPos = new int[2]{7, 5};
+        kingPos = new Dictionary<string, int[]>(){
+            ["white"] = new int[2]{0, 4},
+            ["black"] = new int[2]{7, 4},
+        };
 
     }
 
@@ -60,6 +62,8 @@ public class Board
             map[1,j] = whitePieces[j+8];
             map[6,j] = blackPieces[j+8];
         }
+        map[1,4] = null;
+        
         //map[0,0] = new Rook("white");
         //map[0,1] = new Knight("white");
         //map[0,2] = new Bishop("white");
@@ -79,24 +83,67 @@ public class Board
         //map[7,7] = new Rook("black");
     }
 
-    private void checkChecks()
+    private bool checkChecks(string color)
     {
+        bool check = false;
+        for(int i = 0; i < 8; i++)
+        {
+            for(int j = 0; j < 8; j++)
+            {
+                if(map[i, j] is Piece && map[i, j].GetColor() != color)
+                {
+                    Console.Write("["+ i +","+j+"] ");
+                    Console.Write(" x ");
+                    check = map[i, j].CheckMove(new int[2]{i, j}, kingPos[color], true, map);
+                    Console.WriteLine(check+ " ");
+                }
+            }
+        }
+        Console.WriteLine(check + " HEMOS VISTO");
+
+        return check;
         
     }
 
     public bool Move(int[] pos1, int[] pos2, string color)
     {
-        //if(map[pos1[0], pos1[1]] is null || map[pos1[0], pos1[1]].GetColor() != color)
-            //return false;
-        if(false)
-            Console.Write("ESTO ES UNA PRUEBA PARA PODER MOVER");
+        if(map[pos1[0], pos1[1]] is null || map[pos1[0], pos1[1]].GetColor() != color)
+            return false;
+        //if(false)
+            //Console.Write("ESTO ES UNA PRUEBA PARA PODER MOVER");
         else 
         {
             if(map[pos1[0], pos1[1]].CheckMove(pos1, pos2, false, map))
             {
-                map[pos2[0], pos2[1]] = map[pos1[0], pos1[1]];
+                Console.Write("HOLAAAAAA");
+                Piece piece1 = map[pos1[0], pos1[1]];
+                Piece piece2 = map[pos2[0], pos2[1]];
+
+                if(piece1 is King)
+                {
+                    kingPos[color] = pos2;
+                }
+
+                map[pos2[0], pos2[1]] = piece1;
                 map[pos1[0], pos1[1]] = null;
-                return true;
+
+                if(checkChecks(color))
+                {
+                    Console.Write("YOUVE BEEN CHECKED");
+                    map[pos1[0], pos1[1]] = piece1;
+                    map[pos2[0], pos2[1]] = piece2;
+                    
+                    if(piece1 is King)
+                    {
+                        kingPos[color] = pos2;
+                    }
+
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
             }
             else
                 return false;

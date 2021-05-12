@@ -20,21 +20,22 @@ public class Queen:Piece
         //Rook move
         if((pos1[0] == pos2[0] && pos1[1] != pos2[1]) || (pos1[1] == pos2[1] && pos1[0] != pos2[0]))
         {
-            if(ClearPath(pos1, pos2, map))
+            if(ClearPath(pos1, pos2, capture,  map))
             {
                 return true;
             }
         }
         //Bishop move
         else {
+            Console.Write("NO me meto aqui?"+ pos2[0]+" "+pos2[1]);
             int dist = Math.Abs(pos1[0] - pos2[0]);
-            if(dist != 0 && ClearPath(pos1, pos2, map))
+            Console.WriteLine("esto es: " +(dist != 0 && (Math.Abs(pos1[1] - pos2[1]) == dist) ) + " "+ dist+ " "+Math.Abs(pos1[1] - pos2[1]));
+            if(dist != 0 && Math.Abs(pos1[1] - pos2[1]) == dist && ClearPath(pos1, pos2, capture, map))
             {
-                if(Math.Abs(pos1[1] - pos2[1]) == dist)
-                {
-                    return true;
-                }
+                Console.Write(" y aqui?");
+                return true;
             }
+            return false;
         }
         return false;
     }

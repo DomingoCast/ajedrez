@@ -2,10 +2,6 @@ using System;
 
 public class Queen:Piece
 {
-    //string name;
-    //protected string state;
-    //protected string color;
-    //protected int points;
 
     public Queen(string color)
     {
@@ -27,12 +23,9 @@ public class Queen:Piece
         }
         //Bishop move
         else {
-            Console.Write("NO me meto aqui?"+ pos2[0]+" "+pos2[1]);
             int dist = Math.Abs(pos1[0] - pos2[0]);
-            Console.WriteLine("esto es: " +(dist != 0 && (Math.Abs(pos1[1] - pos2[1]) == dist) ) + " "+ dist+ " "+Math.Abs(pos1[1] - pos2[1]));
             if(dist != 0 && Math.Abs(pos1[1] - pos2[1]) == dist && ClearPath(pos1, pos2, capture, map))
             {
-                Console.Write(" y aqui?");
                 return true;
             }
             return false;

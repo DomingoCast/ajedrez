@@ -105,20 +105,20 @@ public class Board
         
     }
 
-    public bool Move(int[] pos1, int[] pos2, string color)
+    public bool Move(int[] pos1, int[] pos2, bool capture, string color)
     {
-        if(map[pos1[0], pos1[1]] is null || map[pos1[0], pos1[1]].GetColor() != color)
+        //Check if the square is void or if the color of the piece is correct
+        if(map[pos1[0], pos1[1]] is null || map[pos1[0], pos1[1]].GetColor() != color) 
             return false;
-        //if(false)
-            //Console.Write("ESTO ES UNA PRUEBA PARA PODER MOVER");
         else 
         {
-            if(map[pos1[0], pos1[1]].CheckMove(pos1, pos2, false, map))
+            //Check if the piece can move there
+            if(map[pos1[0], pos1[1]].CheckMove(pos1, pos2, capture, map)) 
             {
-                Console.Write("HOLAAAAAA");
                 Piece piece1 = map[pos1[0], pos1[1]];
                 Piece piece2 = map[pos2[0], pos2[1]];
 
+                //If it's a king store the position
                 if(piece1 is King)
                 {
                     kingPos[color] = pos2;
@@ -127,6 +127,7 @@ public class Board
                 map[pos2[0], pos2[1]] = piece1;
                 map[pos1[0], pos1[1]] = null;
 
+                // check if there are checks to your king, if illegal, restore the position
                 if(checkChecks(color))
                 {
                     Console.Write("YOUVE BEEN CHECKED");
@@ -159,14 +160,12 @@ public class Board
         int count = 8;
         foreach(int i in array)
         {
-            //aux += "--------\n";
             Console.Write(count+") ");
             for(int j = 0; j<8; j++)
             {
                 Console.Write("|");
                 if(map[i, j] is null)
                 {
-                    //Console.Write(i+" "+j);
                     if((i%2 == 0 && j%2 ==0) ||(i%2 != 0 && j%2 !=0))
                     {
                         Console.Write("*");
@@ -192,7 +191,6 @@ public class Board
         string aux = "";
         for(int i = 0; i<8; i++)
         {
-            //aux += "--------\n";
             for(int j = 0; j<8; j++)
             {
                 aux +="|";
@@ -201,7 +199,6 @@ public class Board
                     if(i%2 == 0 && j%2 ==0)
                     {
                         aux +="*";
-
                     }
                     else
                     {

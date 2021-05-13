@@ -19,14 +19,23 @@ public class Match
             Console.WriteLine(turn.ToUpper()+" TO MOVE");
             board.Draw();
 
-            Console.Write("Enter move(y,x y,x): " );
-            string[] move = Console.ReadLine().Split(" ");
+            Console.Write("Enter move(y,x y,x (x for capture)): " );
+            string input = Console.ReadLine();
+            Console.WriteLine("HOLA");
+            string[] move = input.Split(" "); //cortar por x o " "
             try
             {
+                bool capture = false;
+                if(input.Split("x").Length == 2)
+                {
+                    capture = true;
+
+                }
                 int[] pos1 = {Convert.ToInt32(move[0].Substring(1)) - 1, Convert.ToInt32(Convert.ToChar(move[0].Substring(0,1)) - 'a')};
-                int[] pos2 = {Convert.ToInt32(move[1].Substring(1)) - 1, Convert.ToInt32(Convert.ToChar(move[1].Substring(0,1)) - 'a')};
+                int[] pos2 = {Convert.ToInt32(move[move.Length - 1].Substring(1)) - 1, Convert.ToInt32(Convert.ToChar(move[move.Length - 1].Substring(0,1)) - 'a')};
                 //int[] pos2 = {Convert.ToInt32(move[1].Split(",")[1]) - 1, Convert.ToInt32(Convert.ToChar(move[1].Split(",")[0]) - 'a'))};
-                error = !board.Move(pos1, pos2, turn);
+                Console.WriteLine("HOLA 2");
+                error = !board.Move(pos1, pos2, capture, turn);
                 if(!error)
                 {
                     if(turn == "white")

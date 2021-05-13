@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 public class Match
 {
     public static void Start()
@@ -17,11 +18,11 @@ public class Match
             }
 
             Console.WriteLine(turn.ToUpper()+" TO MOVE");
+            Console.WriteLine($"PUNTOS : blancas = {board.GetPoints()["white"]} | negras = {board.GetPoints()["black"]}");
             board.Draw();
 
             Console.Write("Enter move(y,x y,x (x for capture)): " );
             string input = Console.ReadLine();
-            Console.WriteLine("HOLA");
             string[] move = input.Split(" "); //cortar por x o " "
             try
             {
@@ -39,9 +40,14 @@ public class Match
                 if(!error)
                 {
                     if(turn == "white")
+                    {
                         turn = "black";
+
+                    }
                     else 
+                    {
                         turn = "white";
+                    }
                 }
             }
             catch

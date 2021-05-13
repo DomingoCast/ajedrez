@@ -5,12 +5,20 @@ public class Board
     private Piece[,] map;
     private Piece[] whitePieces;
     private Piece[] blackPieces;
-    Dictionary<string, int[]> kingPos;
+    private Dictionary<string, int[]> kingPos;
+    protected Dictionary<string, int> points;
+
     public Board()
     {
         map = new Piece[8,8];
         whitePieces = new Piece[16];
         blackPieces = new Piece[16];
+        points = new Dictionary<string, int>()
+        {
+            ["white"] = 0,
+            ["black"] = 0
+
+        };
 
         createPieces();
 
@@ -21,6 +29,12 @@ public class Board
             ["black"] = new int[2]{7, 4},
         };
 
+
+    }
+    
+    public Dictionary<string, int> GetPoints()
+    {
+        return points;
     }
 
     private void createPieces()
@@ -62,25 +76,6 @@ public class Board
             map[1,j] = whitePieces[j+8];
             map[6,j] = blackPieces[j+8];
         }
-        map[1,4] = null;
-        
-        //map[0,0] = new Rook("white");
-        //map[0,1] = new Knight("white");
-        //map[0,2] = new Bishop("white");
-        //map[0,3] = new Queen("white");
-        //map[0,4] = new King("white");
-        //map[0,5] = new Bishop("white");
-        //map[0,6] = new Knight("white");
-        //map[0,7] = new Rook("white");
-        
-        //map[7,0] = new Rook("black");
-        //map[7,1] = new Knight("black");
-        //map[7,2] = new Bishop("black");
-        //map[7,3] = new Queen("black");
-        //map[7,4] = new King("black");
-        //map[7,5] = new Bishop("black");
-        //map[7,6] = new Knight("black");
-        //map[7,7] = new Rook("black");
     }
 
     private bool checkChecks(string color)
@@ -108,7 +103,7 @@ public class Board
     public bool Move(int[] pos1, int[] pos2, bool capture, string color)
     {
         //Check if the square is void or if the color of the piece is correct
-        if(map[pos1[0], pos1[1]] is null || map[pos1[0], pos1[1]].GetColor() != color) 
+        if(map[pos1[0], pos1[1]] is null || map[pos1[0], pos1[1]].GetColor() != color || (capture && map[pos2[0], pos2[1]] is null )) 
             return false;
         else 
         {
@@ -143,6 +138,8 @@ public class Board
                 }
                 else
                 {
+                    if(capture)
+                        points[color]+= piece2.GetPoints();
                     return true;
                 }
             }

@@ -26,12 +26,11 @@ public abstract class Piece
 
         int x = pos1[0] + dist1;
         int y = pos1[1] + dist2;
-        //Console.WriteLine(Math.Max(Math.Abs(pos1[0] - pos2[0]), Math.Abs(pos1[0] - pos2[0])) + " " + dist1 + " " + dist2);
+
         for(int i = 0; i<= Math.Max(Math.Abs(pos1[0] - pos2[0]), Math.Abs(pos1[0] - pos2[0])) - captureExtension; i++ )
         {
             if( x < 8 && x >= 0 && y < 8 && y >= 0)
             {
-                Console.WriteLine("CAMINITO: " + x + " " + y);
                 if(map[x, y] is null)
                 {
                 }
@@ -44,7 +43,6 @@ public abstract class Piece
                 y += dist2;
             }
         }
-        Console.WriteLine("YATARIA: " + clearPath);
 
         return clearPath;
     }

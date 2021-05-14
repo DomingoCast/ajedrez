@@ -23,9 +23,9 @@ public class Pawn:Piece
 
         if(capture)
         {
-            Console.WriteLine("Yo me meto aqui");
-            Console.Write("ESTO: "+ ((pos1[1] == pos2[1] - 1 || pos1[1] == pos2[1] + 1) && pos1[0] == pos1[0] + j));
-            return (pos1[1] == pos2[1] - 1 || pos1[1] == pos2[1] + 1) && pos1[0] == pos1[0] + j; //diagonal
+            //Console.WriteLine("Yo me meto aqui");
+            //Console.Write("ESTO: "+ ((pos1[1] == pos2[1] - 1 || pos1[1] == pos2[1] + 1) && pos1[0] == pos2[0] + j));
+            return (pos1[1] == pos2[1] - 1 || pos1[1] == pos2[1] + 1) && pos1[0] == pos2[0] + j; //diagonal
         }
         else
         {

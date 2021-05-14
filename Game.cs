@@ -5,6 +5,7 @@ public class Game
     {
         Console.WriteLine("Press any key to continue...");
         Console.ReadLine();
-        Match.Start();
+        Match partida = new Match("prueba", "unlimited 1v1");
+        partida.Start();
     }
 }

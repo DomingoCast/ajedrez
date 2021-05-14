@@ -2,7 +2,18 @@ using System;
 using System.Collections.Generic;
 public class Match
 {
-    public static void Start()
+    DateTime fecha;
+    string nombre;
+    string tipo;
+
+    public Match(string nombre, string tipo)
+    {
+        this.nombre = nombre;
+        this.tipo = tipo;
+        this.fecha = DateTime.Now;
+    }
+
+    public void Start()
     {
         Board board = new Board();
         //Console.Write(board);

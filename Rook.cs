@@ -23,6 +23,11 @@ public class Rook:Piece
         return false;
     }
 
+    public bool getHasMoved()
+    {
+        return hasMoved;
+    }
+
     public override string ToString()
     {
         if(color == "white")

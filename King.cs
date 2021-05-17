@@ -23,14 +23,14 @@ public class King:Piece
             return true;
         }
         else
-            return false
+            return false;
 
         return false;
     }
 
     public bool GetHasMoved()
     {
-        return hasMoved
+        return hasMoved;
     }
 
     public override string ToString()

@@ -1,71 +1,49 @@
 using System;
 using System.IO;
-using System.Collections.Generic;
-public class Match
-{
-    DateTime fecha;
-    string nombre;
-    string tipo;
+//using System.Collections.Generic;
 
-    public Match(string nombre, string tipo)
+public class Review
+{
+    string nombre;
+
+    public Review(string nombre)
     {
         this.nombre = nombre;
-        this.tipo = tipo;
-        this.fecha = DateTime.Now;
     }
 
     public void Start()
     {
         Board board = new Board();
 
-        StreamWriter fileW = new StreamWriter("prueba.txt"); // le pongo prueba para probar
-        fileW.WriteLine(nombre);
-        fileW.WriteLine(fecha);
-        fileW.WriteLine(tipo);
+        string[] filas= File.ReadAllLines(nombre);
 
         string turn = "white";
         bool error = false;
-        string input = "";
-        while(input != "ff")
+        for(int i = 3; i< filas.Length; i++)
         {
             Console.Clear();
-            if(error)
-            {
-                Console.SetCursorPosition(40, 10);
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Ilegal move");
-                Console.ResetColor();
-            }
 
-            Console.SetCursorPosition(40, 2);
             Console.WriteLine(turn.ToUpper()+" TO MOVE");
-
-            Console.SetCursorPosition(40, 5);
             Console.WriteLine($"PUNTOS : blancas = {board.GetPoints()["white"]} | negras = {board.GetPoints()["black"]}");
-
-            Console.SetCursorPosition(0, 0);
             board.Draw();
 
-            Console.SetCursorPosition(40, 15);
-            Console.Write("Enter move(y,x y,x (x for capture)): " );
-            input = Console.ReadLine();
-            string[] move = input.Split(" "); //cortar por x o " "
+            Console.Write("Arrow key");
+            ConsoleKeyInfo input = Console.ReadKey();
+
+            string[] move = filas[i].Split(" "); //cortar por x o " "
             try
             {
                 bool capture = false;
-                if(input.Split("x").Length == 2)
+                if(filas[i].Split("x").Length == 2)
                 {
                     capture = true;
-
                 }
                 int[] pos1 = {Convert.ToInt32(move[0].Substring(1)) - 1, Convert.ToInt32(Convert.ToChar(move[0].Substring(0,1)) - 'a')};
                 int[] pos2 = {Convert.ToInt32(move[move.Length - 1].Substring(1)) - 1, Convert.ToInt32(Convert.ToChar(move[move.Length - 1].Substring(0,1)) - 'a')};
-                //int[] pos2 = {Convert.ToInt32(move[1].Split(",")[1]) - 1, Convert.ToInt32(Convert.ToChar(move[1].Split(",")[0]) - 'a'))};
-                Console.WriteLine("HOLA 2");
+
                 error = !board.Move(pos1, pos2, capture, turn);
                 if(!error)
                 {
-                    fileW.WriteLine(input);
                     if(turn == "white")
                     {
                         turn = "black";
@@ -76,13 +54,12 @@ public class Match
                         turn = "white";
                     }
                 }
-
             }
             catch
             {
                 error = true;
             }
         }
-        fileW.Close();
+        board.Draw();
     }
 }

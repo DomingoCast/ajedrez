@@ -148,7 +148,7 @@ public class Board
         }
     }
 
-    public void Draw(/*string color*/)
+    public void Draw2(/*string color*/)
     {
         int[] array = {7,6,5,4,3,2,1,0};
         //if(color == "black")
@@ -183,6 +183,52 @@ public class Board
         }
         Console.WriteLine("\n   |a|b|c|d|e|f|g|h|");
     }
+
+    public void Draw(/*string color*/)
+    {
+        int[] array = {7,6,5,4,3,2,1,0};
+        //if(color == "black")
+            //array = {7,6,5,4,3,2,1,0};
+
+        int count = 8;
+        string linea = "\u2500\u2500\u2500";
+        Console.WriteLine("  \u250C"+linea+"\u252C"+linea+"\u252C"+linea+"\u252C"+linea+"\u252C"+linea+"\u252C"+linea+"\u252C"+linea+"\u252C"+linea+"\u2510");// cuadrados negros
+        foreach(int i in array)
+        {
+            Console.Write(count+" ");
+            for(int j = 0; j<8; j++)
+            {
+                Console.Write("\u2502");
+                if(map[i, j] is null)
+                {
+                    if((i%2 == 0 && j%2 ==0) ||(i%2 != 0 && j%2 !=0))
+                    {
+                        Console.Write("   ");// cuadrados negros
+
+                    }
+                    else
+                    {
+                        Console.Write("   ");
+                    }
+                }
+                else
+                {
+                    Console.Write(" " + map[i, j] + " ");
+                }
+            }
+            Console.WriteLine("\u2502");
+
+            if(i != 0) //ultima posicion
+            {
+                Console.WriteLine("  \u251C"+linea+"\u253C"+linea+"\u253C"+linea+"\u253C"+linea+"\u253C"+linea+"\u253C"+linea+"\u253C"+linea+"\u253C"+linea+"\u2525");
+            }
+
+            count -- ;
+        }
+        Console.WriteLine("  \u2514"+linea+"\u2534"+linea+"\u2534"+linea+"\u2534"+linea+"\u2534"+linea+"\u2534"+linea+"\u2534"+linea+"\u2534"+linea+"\u2518");
+        Console.WriteLine("\n    A   B   C   D   E   F   G   H");
+    }
+
     public override string ToString()
     {
         string aux = "";

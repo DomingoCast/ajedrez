@@ -213,7 +213,10 @@ public class Board
                 }
                 else
                 {
+                    if(map[i, j].GetColor() == "black")
+                        Console.ForegroundColor = ConsoleColor.Blue;
                     Console.Write(" " + map[i, j] + " ");
+                    Console.ResetColor();
                 }
             }
             Console.WriteLine("\u2502");

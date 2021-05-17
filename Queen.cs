@@ -9,6 +9,7 @@ public class Queen:Piece
         this.name = "Queen";
         this.state = "alive";
         this.points = 10;
+        this.shape = "Q";
     }
 
     override public bool CheckMove(int[] pos1, int[] pos2, bool capture, Piece[,] map)
@@ -33,12 +34,4 @@ public class Queen:Piece
         return false;
     }
 
-    public override string ToString()
-    {
-        if(color == "white")
-            return "q";
-        else
-            return "Q";
-
-    }
 }

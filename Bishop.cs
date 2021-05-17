@@ -12,6 +12,7 @@ public class Bishop:Piece
         this.name = "Bishop";
         this.state = "alive";
         this.points = 3;
+        this.shape = "B";
     }
 
     override public bool CheckMove(int[] pos1, int[] pos2, bool capture, Piece[,] map)
@@ -22,14 +23,5 @@ public class Bishop:Piece
             return true;
         }
         return false;
-    }
-
-    public override string ToString()
-    {
-        if(color == "white")
-            return "b";
-        else
-            return "B";
-
     }
 }

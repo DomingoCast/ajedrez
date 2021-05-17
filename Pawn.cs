@@ -13,6 +13,7 @@ public class Pawn:Piece
         this.name = "pawn";
         this.state = "alive";
         this.points = 1;
+        this.shape = "P";
     }
 
     override public bool CheckMove(int[] pos1, int[] pos2, bool capture, Piece[,] map)
@@ -46,14 +47,5 @@ public class Pawn:Piece
 
             }
         }
-    }
-
-    public override string ToString()
-    {
-        if(color == "white")
-            return "p";
-        else
-            return "P";
-
     }
 }

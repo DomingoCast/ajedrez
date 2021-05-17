@@ -5,6 +5,7 @@ public abstract class Piece
     protected string state;
     protected string color;
     protected int points;
+    protected string shape;
 
     public abstract bool CheckMove(int[] pos1, int[] pos2, bool capture, Piece[,] map);
     protected bool ClearPath(int[] pos1, int[]pos2, bool capture, Piece[,]map)
@@ -47,7 +48,6 @@ public abstract class Piece
         return clearPath;
     }
 
-    public abstract override string ToString();
     public string GetName()
     {
         return name;
@@ -64,4 +64,12 @@ public abstract class Piece
     {
         return points;
     }
+
+    public override string ToString()
+    {
+        return shape;
+
+    }
+
+
 }

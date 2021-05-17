@@ -8,6 +8,7 @@ public class Rook:Piece
         this.name = "Rook";
         this.state = "alive";
         this.points = 5;
+        this.shape = "R";
     }
 
     override public bool CheckMove(int[] pos1, int[] pos2, bool capture, Piece[,] map)
@@ -26,14 +27,5 @@ public class Rook:Piece
     public bool getHasMoved()
     {
         return hasMoved;
-    }
-
-    public override string ToString()
-    {
-        if(color == "white")
-            return "r";
-        else
-            return "R";
-
     }
 }

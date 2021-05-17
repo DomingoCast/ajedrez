@@ -10,6 +10,7 @@ public class Knight:Piece
         this.name = "knight";
         this.state = "alive";
         this.points = 3;
+        this.shape = "N";
     }
 
     override public bool CheckMove(int[] pos1, int[] pos2, bool capture, Piece[,] map)
@@ -29,12 +30,4 @@ public class Knight:Piece
         return false;
     }
 
-    public override string ToString()
-    {
-        if(color == "white")
-            return "n";
-        else
-            return "N";
-
-    }
 }

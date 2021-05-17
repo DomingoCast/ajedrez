@@ -11,6 +11,7 @@ public class King:Piece
         this.state = "alive";
         this.points = 0;
         hasMoved = false;
+        this.shape = "K";
     }
 
     override public bool CheckMove(int[] pos1, int[] pos2, bool capture, Piece[,] map)
@@ -31,14 +32,5 @@ public class King:Piece
     public bool GetHasMoved()
     {
         return hasMoved;
-    }
-
-    public override string ToString()
-    {
-        if(color == "white")
-            return "k";
-        else
-            return "K";
-
     }
 }

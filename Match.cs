@@ -18,7 +18,7 @@ public class Match
     {
         Board board = new Board();
 
-        StreamWriter fileW = new StreamWriter("prueba.txt"); // le pongo prueba para probar
+        StreamWriter fileW = new StreamWriter("games/" + fecha.ToString("yyyyMMdd-hhmmss") + "-f-" + nombre); // le pongo prueba para probar
         fileW.WriteLine(nombre);
         fileW.WriteLine(fecha);
         fileW.WriteLine(tipo);
@@ -56,12 +56,11 @@ public class Match
                 if(input.Split("x").Length == 2)
                 {
                     capture = true;
-
                 }
+
                 int[] pos1 = {Convert.ToInt32(move[0].Substring(1)) - 1, Convert.ToInt32(Convert.ToChar(move[0].Substring(0,1)) - 'a')};
                 int[] pos2 = {Convert.ToInt32(move[move.Length - 1].Substring(1)) - 1, Convert.ToInt32(Convert.ToChar(move[move.Length - 1].Substring(0,1)) - 'a')};
-                //int[] pos2 = {Convert.ToInt32(move[1].Split(",")[1]) - 1, Convert.ToInt32(Convert.ToChar(move[1].Split(",")[0]) - 'a'))};
-                Console.WriteLine("HOLA 2");
+
                 error = !board.Move(pos1, pos2, capture, turn);
                 if(!error)
                 {
@@ -76,7 +75,6 @@ public class Match
                         turn = "white";
                     }
                 }
-
             }
             catch
             {

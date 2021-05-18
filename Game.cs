@@ -1,6 +1,57 @@
 using System;
+using System.IO;
+
 public class Game
 {
+    private static string newMatch()
+    {
+        Console.Clear();
+        Console.Write("Introduce nombre partida: ");
+        return Console.ReadLine();
+
+    }
+    private static string reviewMenu()
+    {
+        string[] array = Directory.GetFiles("./games", "*-f-*");
+        
+        int pos = 0;
+        ConsoleKeyInfo tecla;
+        while(true)
+        {
+            Console.Clear();
+
+            for(int i = 0; i< array.Length; i++)
+            {
+                if(i == pos)
+                {
+                    Console.BackgroundColor = ConsoleColor.White;
+                    Console.ForegroundColor = ConsoleColor.Black;
+                    Console.WriteLine(array[i].Split("-f-")[1]);
+                    Console.ResetColor();
+                }
+                else
+                    Console.WriteLine(array[i].Split("-f-")[1]);
+            }
+
+            tecla = Console.ReadKey();
+            if(tecla.Key == ConsoleKey.UpArrow)
+            {
+                if(pos > 0)
+                    pos--;
+
+            }
+            else if(tecla.Key == ConsoleKey.DownArrow)
+            {
+                if(pos < array.Length)
+                    pos++;
+            }
+            else if(tecla.Key == ConsoleKey.Enter)
+            {
+                return array[pos];
+            }
+        }
+    }
+
     public static void Start()
     {
         //Console.WriteLine("Press any key to continue...");
@@ -10,13 +61,16 @@ public class Game
         string input = Console.ReadLine();
         if(input == "1")
         {
-            Match partida = new Match("prueba", "unlimited 1v1");
+            
+            Match partida = new Match(newMatch(), "unlimited 1v1");
+            Console.Clear();
             partida.Start();
 
         }
         else if (input == "2")
         {
-            Review partida = new Review("prueba.txt"); //fijo mientras
+            Review partida = new Review(reviewMenu()); //fijo mientras
+            Console.Clear();
             partida.Start();
         }
         else

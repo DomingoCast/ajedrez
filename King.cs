@@ -25,8 +25,6 @@ public class King:Piece
         }
         else
             return false;
-
-        return false;
     }
 
     public bool GetHasMoved()

@@ -78,7 +78,7 @@ public class Board
         }
     }
 
-    private bool checkChecks(string color)
+    private bool checkChecks(string color) // se puede optimizar con WHILE
     {
         bool check = false;
         for(int i = 0; i < 8; i++)
@@ -89,7 +89,8 @@ public class Board
                 {
                     Console.Write("["+ i +","+j+"] ");
                     Console.Write(" x ");
-                    check = map[i, j].CheckMove(new int[2]{i, j}, kingPos[color], true, map);
+                    if(check == false)
+                        check = map[i, j].CheckMove(new int[2]{i, j}, kingPos[color], true, map);
                     Console.WriteLine(check+ " ");
                 }
             }

@@ -28,8 +28,6 @@ public class Board
             ["white"] = new int[2]{0, 4},
             ["black"] = new int[2]{7, 4},
         };
-
-
     }
     
     public Dictionary<string, int> GetPoints()
@@ -147,6 +145,57 @@ public class Board
             else
                 return false;
         }
+    }
+
+    public bool Castle(string side, string color)
+    {
+        int[] oldKingPos = this.kingPos[color]; //asignar a propiedad
+        bool isChecked = false;
+
+        // Poner los supuestos valores en white y kingside
+        int[] kingPos = new int[]{0, 4};
+        int[] rookPos = new int[]{0, 7}; // white rook king side
+        int moveDist = 2;
+        //actualizar los valores al input
+        if(color == "black")
+        {
+            kingPos[0] = 7;
+            rookPos[0] = 7;
+        }
+        if(side == "queen")
+        {
+            rookPos[1] = 0;
+            moveDist *= -1;
+        }
+
+        if(map[kingPos[0], kingPos[1]] is King && !((King)map[kingPos[0], kingPos[1]]).GetHasMoved() &&  //is there and hasnt moved
+                map[rookPos[0], rookPos[1]] is Rook && !((Rook)map[rookPos[0], rookPos[1]]).GetHasMoved() &&
+                map[kingPos[0], kingPos[1]].CheckMove(kingPos, new int[]{kingPos[0], kingPos[1] + moveDist}, false, map) && //there's nothing in between
+                map[rookPos[0], rookPos[1]].CheckMove(rookPos, new int[]{kingPos[0], kingPos[1] - moveDist/2}, false, map)
+            )
+        {
+            for(int i = 0; i<=2; i++)
+            {
+                kingPos[1] += moveDist*i/2;
+                this.kingPos[color] = kingPos;
+                if(checkChecks(color))
+                    isChecked = true;
+            }
+
+            if(!isChecked)
+            {
+                map[kingPos[0], kingPos[1] + moveDist] = map[kingPos[0], kingPos[1]];
+                map[kingPos[0], kingPos[1] - moveDist/2] = map[rookPos[0], rookPos[1]];
+                map[kingPos[0], kingPos[1]] = null;
+                map[rookPos[0], rookPos[1]] = null;
+
+                return true;
+            }
+        }
+        
+        this.kingPos[color] = oldKingPos; //reset kingPos
+
+        return false;
     }
 
     public void Draw(/*string color*/)

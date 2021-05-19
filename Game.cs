@@ -6,6 +6,7 @@ public class Game
     private static string newMatch()
     {
         Console.Clear();
+        Console.SetCursorPosition(15, 15);
         Console.Write("Introduce nombre partida: ");
         return Console.ReadLine();
 
@@ -55,9 +56,13 @@ public class Game
     public static void Start()
     {
         //Console.WriteLine("Press any key to continue...");
+        Console.Clear();
+        Console.SetCursorPosition(18, 13);
         Console.WriteLine("WELCOME TO TERMINAL CHESS");
         Console.WriteLine();
+        Console.SetCursorPosition(13, 15);
         Console.Write("Press 1 for new game 2 for review: ");
+
         string input = Console.ReadLine();
         if(input == "1")
         {

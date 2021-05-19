@@ -24,7 +24,7 @@ public class Rook:Piece
         return false;
     }
 
-    public bool getHasMoved()
+    public bool GetHasMoved()
     {
         return hasMoved;
     }

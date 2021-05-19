@@ -49,10 +49,22 @@ public class Match
             Console.SetCursorPosition(40, 15);
             Console.Write("Enter move(y,x y,x (x for capture)): " );
             input = Console.ReadLine();
-            string[] move = input.Split(" "); //cortar por x o " "
+
+            string[] move = input.Split(" ");
+
             try
             {
                 bool capture = false;
+                if(move.Length == 1) // Casteling 0-0 0-0-0
+                {
+                    if(move[0] == "0-0")
+                        board.Castle("king", turn);
+                    else if(move[0] == "0-0-0")
+                        board.Castle("queen", turn);
+                    else
+                        error = true;
+                }
+
                 if(input.Split("x").Length == 2)
                 {
                     capture = true;
@@ -68,7 +80,6 @@ public class Match
                     if(turn == "white")
                     {
                         turn = "black";
-
                     }
                     else 
                     {

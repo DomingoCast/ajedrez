@@ -74,14 +74,6 @@ public class Board
             map[1,j] = whitePieces[j+8];
             map[6,j] = blackPieces[j+8];
         }
-
-        //modificar mapa
-        map[0,5] = null;
-        map[0,6] = null;
-
-        map[7,1] = null;
-        map[7,2] = null;
-        map[7,3] = null;
     }
 
     private bool checkChecks(string color) // se puede optimizar con WHILE

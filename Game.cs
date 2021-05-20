@@ -3,7 +3,7 @@ using System.IO;
 
 public class Game
 {
-    private static string newMatch()
+    private static string newMultiplayer()
     {
         Console.Clear();
         Console.SetCursorPosition(15, 15);
@@ -68,7 +68,7 @@ public class Game
         if(input == "1")
         {
             
-            Match partida = new Match(newMatch(), "unlimited 1v1");
+            Multiplayer partida = new Multiplayer(newMultiplayer(), "unlimited 1v1");
             Console.Clear();
             partida.Start();
 

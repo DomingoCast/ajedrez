@@ -11,6 +11,7 @@ public class Game
         return Console.ReadLine();
 
     }
+
     private static string reviewMenu()
     {
         string[] array = Directory.GetFiles("./games", "*-f-*");

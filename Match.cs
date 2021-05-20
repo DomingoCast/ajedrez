@@ -1,6 +1,7 @@
 using System;
 using System.IO;
-using System.Collections.Generic;
+//using System.Collections.Generic;
+
 public class Match
 {
     DateTime fecha;
@@ -18,7 +19,7 @@ public class Match
     {
         Board board = new Board();
 
-        StreamWriter fileW = new StreamWriter("games/" + fecha.ToString("yyyyMMdd-hhmmss") + "-f-" + nombre); // le pongo prueba para probar
+        StreamWriter fileW = new StreamWriter("games/" + fecha.ToString("yyyyMMdd-hhmmss") + "-f-" + nombre);
         fileW.WriteLine(nombre);
         fileW.WriteLine(fecha);
         fileW.WriteLine(tipo);
@@ -57,23 +58,28 @@ public class Match
                 bool capture = false;
                 if(move.Length == 1) // Casteling 0-0 0-0-0
                 {
+                    Console.WriteLine("HELOO");
                     if(move[0] == "0-0")
-                        board.Castle("king", turn);
+                        error = !board.Castle("king", turn);
                     else if(move[0] == "0-0-0")
-                        board.Castle("queen", turn);
+                        error = !board.Castle("queen", turn);
                     else
                         error = true;
                 }
 
-                if(input.Split("x").Length == 2)
+                else
                 {
-                    capture = true;
+                    if(input.Split("x").Length == 2)
+                    {
+                        capture = true;
+                    }
+
+                    int[] pos1 = {Convert.ToInt32(move[0].Substring(1)) - 1, Convert.ToInt32(Convert.ToChar(move[0].Substring(0,1)) - 'a')};
+                    int[] pos2 = {Convert.ToInt32(move[move.Length - 1].Substring(1)) - 1, Convert.ToInt32(Convert.ToChar(move[move.Length - 1].Substring(0,1)) - 'a')};
+
+                    error = !board.Move(pos1, pos2, capture, turn);
                 }
 
-                int[] pos1 = {Convert.ToInt32(move[0].Substring(1)) - 1, Convert.ToInt32(Convert.ToChar(move[0].Substring(0,1)) - 'a')};
-                int[] pos2 = {Convert.ToInt32(move[move.Length - 1].Substring(1)) - 1, Convert.ToInt32(Convert.ToChar(move[move.Length - 1].Substring(0,1)) - 'a')};
-
-                error = !board.Move(pos1, pos2, capture, turn);
                 if(!error)
                 {
                     fileW.WriteLine(input);

@@ -74,6 +74,14 @@ public class Board
             map[1,j] = whitePieces[j+8];
             map[6,j] = blackPieces[j+8];
         }
+
+        //modificar mapa
+        map[0,5] = null;
+        map[0,6] = null;
+
+        map[7,1] = null;
+        map[7,2] = null;
+        map[7,3] = null;
     }
 
     private bool checkChecks(string color) // se puede optimizar con WHILE
@@ -167,27 +175,51 @@ public class Board
             rookPos[1] = 0;
             moveDist *= -1;
         }
+        Console.WriteLine("THIS IS THE STUFF");
 
-        if(map[kingPos[0], kingPos[1]] is King && !((King)map[kingPos[0], kingPos[1]]).GetHasMoved() &&  //is there and hasnt moved
-                map[rookPos[0], rookPos[1]] is Rook && !((Rook)map[rookPos[0], rookPos[1]]).GetHasMoved() &&
-                map[kingPos[0], kingPos[1]].CheckMove(kingPos, new int[]{kingPos[0], kingPos[1] + moveDist}, false, map) && //there's nothing in between
-                map[rookPos[0], rookPos[1]].CheckMove(rookPos, new int[]{kingPos[0], kingPos[1] - moveDist/2}, false, map)
-            )
+        //Console.Write("N1" + map[kingPos[0], kingPos[1]] is King && !((King)map[kingPos[0], kingPos[1]]).GetHasMoved());
+        //Console.Write(map[rookPos[0], rookPos[1]] is Rook && !((Rook)map[rookPos[0], rookPos[1]]).GetHasMoved());
+        //Console.Write(((King)map[kingPos[0], kingPos[1]]).CheckMoveCas(kingPos, new int[]{kingPos[0], kingPos[1] + moveDist}, map));
+        //Console.Write(map[rookPos[0], rookPos[1]].CheckMove(rookPos, new int[]{kingPos[0], kingPos[1] - moveDist/2}, false, map));
+        //Console.WriteLine(
+            //map[kingPos[0], kingPos[1]] //&& !((King)map[kingPos[0], kingPos[1]]).GetHasMoved() //&&
+            //);
+
+        Console.Write( "[[" +(
+            map[kingPos[0], kingPos[1]] is King //&& !((King)map[kingPos[0], kingPos[1]]).GetHasMoved() //&&
+            //map[rookPos[0], rookPos[1]] is Rook && !((Rook)map[rookPos[0], rookPos[1]]).GetHasMoved() &&
+            //((King)map[kingPos[0], kingPos[1]]).CheckMoveCas(kingPos, new int[]{kingPos[0], kingPos[1] + moveDist}, map) &&
+            //map[rookPos[0], rookPos[1]].CheckMove(rookPos, new int[]{kingPos[0], kingPos[1] - moveDist/2}, false, map)
+            )+ "]]"
+        );
+
+        if(
+            map[kingPos[0], kingPos[1]] is King && !((King)map[kingPos[0], kingPos[1]]).GetHasMoved() &&
+            map[rookPos[0], rookPos[1]] is Rook && !((Rook)map[rookPos[0], rookPos[1]]).GetHasMoved() &&
+            ((King)map[kingPos[0], kingPos[1]]).CheckMoveCas(kingPos, new int[]{kingPos[0], kingPos[1] + moveDist}, map) &&
+            map[rookPos[0], rookPos[1]].CheckMove(rookPos, new int[]{kingPos[0], kingPos[1] + moveDist/2}, false, map)
+        )
         {
+            Console.WriteLine("WERE IN");
             for(int i = 0; i<=2; i++)
             {
-                kingPos[1] += moveDist*i/2;
-                this.kingPos[color] = kingPos;
                 if(checkChecks(color))
                     isChecked = true;
+
+                this.kingPos[color][1] += moveDist*i/2;
+                Console.Write("WERE IN HERE" + isChecked);
             }
 
             if(!isChecked)
             {
+                Console.WriteLine("WE'RE EVEN HERE");
+                Console.WriteLine(kingPos[0]+" "+ kingPos[1] +" "+ moveDist);
                 map[kingPos[0], kingPos[1] + moveDist] = map[kingPos[0], kingPos[1]];
-                map[kingPos[0], kingPos[1] - moveDist/2] = map[rookPos[0], rookPos[1]];
+                map[kingPos[0], kingPos[1] + moveDist/2] = map[rookPos[0], rookPos[1]];
                 map[kingPos[0], kingPos[1]] = null;
                 map[rookPos[0], rookPos[1]] = null;
+
+                this.kingPos[color] = kingPos;  //Actualizar posicion de rey
 
                 return true;
             }

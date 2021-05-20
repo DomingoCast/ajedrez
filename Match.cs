@@ -1,21 +1,11 @@
 using System;
-using System.IO;
-//using System.Collections.Generic;
 
 public abstract class Match
 {
-    //DateTime fecha;
-    //string nombre;
-    //string tipo;
+    protected string nombre;
+    protected Board board;
 
-    //public Match(string nombre, string tipo)
-    //{
-        //this.nombre = nombre;
-        //this.tipo = tipo;
-        //this.fecha = DateTime.Now;
-    //}
-
-    protected void displayUI(bool error, string turn, Board board)
+    protected void displayUI(bool error, string turn)
     {
             Console.Clear();
             if(error)
@@ -36,7 +26,7 @@ public abstract class Match
             board.Draw();
     }
 
-    protected void handleMovement(string input, ref bool error, ref string turn, Board board)
+    protected void handleMovement(string input, ref bool error, ref string turn)
     {
         string[] move = input.Split(" ");
         bool capture = false;
@@ -78,41 +68,4 @@ public abstract class Match
     }
 
     public abstract void Start();
-
-    //public void Start()
-    //{
-        //Board board = new Board();
-
-        //StreamWriter fileW = new StreamWriter("games/" + fecha.ToString("yyyyMMdd-hhmmss") + "-f-" + nombre);
-        //fileW.WriteLine(nombre);
-        //fileW.WriteLine(fecha);
-        //fileW.WriteLine(tipo);
-
-        //string turn = "white";
-        //bool error = false;
-        //string input = "";
-        //while(input != "ff")
-        //{
-            //displayUI(error, turn, board);
-
-            //Console.SetCursorPosition(40, 15);
-            //Console.Write("Enter move(y,x y,x (x for capture)): " );
-            //input = Console.ReadLine();
-
-            //handleMovement(input, ref error, ref turn, board);
-
-            //if(!error)
-            //{
-                //try
-                //{
-                    //fileW.WriteLine(input);
-                //}
-                //catch(IOException)
-                //{
-                //}
-            //}
-        //}
-
-        //fileW.Close(); 
-    //}
 }

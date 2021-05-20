@@ -54,34 +54,51 @@ public class Game
         }
     }
 
-    public static void Start()
+    private static void exit()
     {
-        //Console.WriteLine("Press any key to continue...");
+        Console.Clear();
+        Console.Write("Goodbye...");
+        Console.ReadKey();
+    }
+
+    private static void showMenu()
+    {
         Console.Clear();
         Console.SetCursorPosition(18, 13);
         Console.WriteLine("WELCOME TO TERMINAL CHESS");
         Console.WriteLine();
         Console.SetCursorPosition(13, 15);
-        Console.Write("Press 1 for new game 2 for review: ");
+        Console.Write("Press 1 for multiplayer 2 for review (E for exit): ");
+    }
 
-        string input = Console.ReadLine();
-        if(input == "1")
+    public static void Start()
+    {
+        string input= "";
+        while(input.ToLower() != "e")
         {
-            
-            Multiplayer partida = new Multiplayer(newMultiplayer(), "unlimited 1v1");
-            Console.Clear();
-            partida.Start();
+            showMenu();
+            input = Console.ReadLine();
+            switch(input)
+            {
+                case "1":
+                    
+                    Multiplayer partidaMult = new Multiplayer(newMultiplayer(), "unlimited 1v1");
+                    Console.Clear();
+                    partidaMult.Start();
+                    break;
 
-        }
-        else if (input == "2")
-        {
-            Review partida = new Review(reviewMenu()); //fijo mientras
-            Console.Clear();
-            partida.Start();
-        }
-        else
-        {
-            Console.WriteLine("U damn fuck, don't even know how to follow the rules''");
+                case "2":
+                    Review partidaRev = new Review(reviewMenu()); 
+                    Console.Clear();
+                    partidaRev.Start();
+                    break;
+                case "e":
+                case "E":
+                    exit();
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }

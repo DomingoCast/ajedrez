@@ -1,12 +1,6 @@
 using System;
 public class Pawn:Piece
 {
-    //string name;
-    //protected string state;
-    //protected string color;
-    //protected int points;
-    //private bool enPassant = false;
-
     public Pawn(string color)
     {
         this.color = color;
@@ -24,8 +18,6 @@ public class Pawn:Piece
 
         if(capture)
         {
-            //Console.WriteLine("Yo me meto aqui");
-            //Console.Write("ESTO: "+ ((pos1[1] == pos2[1] - 1 || pos1[1] == pos2[1] + 1) && pos1[0] == pos2[0] + j));
             return (pos1[1] == pos2[1] - 1 || pos1[1] == pos2[1] + 1) && pos1[0] == pos2[0] + j; //diagonal
         }
         else
@@ -44,7 +36,6 @@ public class Pawn:Piece
                     return ClearPath(pos1, pos2, false, map); //Comprobar si funciona
                 else
                     return false;
-
             }
         }
     }

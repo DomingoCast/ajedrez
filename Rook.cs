@@ -11,6 +11,12 @@ public class Rook:Piece
         this.shape = "R";
     }
 
+
+    public bool GetHasMoved()
+    {
+        return hasMoved;
+    }
+
     override public bool CheckMove(int[] pos1, int[] pos2, bool capture, Piece[,] map)
     {
         if((pos1[0] == pos2[0] && pos1[1] != pos2[1]) || (pos1[1] == pos2[1] && pos1[0] != pos2[0]))
@@ -22,10 +28,5 @@ public class Rook:Piece
             }
         }
         return false;
-    }
-
-    public bool GetHasMoved()
-    {
-        return hasMoved;
     }
 }

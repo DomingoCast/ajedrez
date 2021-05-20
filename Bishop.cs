@@ -1,11 +1,6 @@
 using System;
 public class Bishop:Piece
 {
-    //string name;
-    //protected string state;
-    //protected string color;
-    //protected int points;
-
     public Bishop(string color)
     {
         this.color = color;

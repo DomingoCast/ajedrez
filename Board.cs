@@ -156,6 +156,7 @@ public class Board
         int[] kingPos = new int[]{0, 4};
         int[] rookPos = new int[]{0, 7}; // white rook king side
         int moveDist = 2;
+
         //actualizar los valores al input
         if(color == "black")
         {
@@ -167,23 +168,6 @@ public class Board
             rookPos[1] = 0;
             moveDist *= -1;
         }
-        Console.WriteLine("THIS IS THE STUFF");
-
-        //Console.Write("N1" + map[kingPos[0], kingPos[1]] is King && !((King)map[kingPos[0], kingPos[1]]).GetHasMoved());
-        //Console.Write(map[rookPos[0], rookPos[1]] is Rook && !((Rook)map[rookPos[0], rookPos[1]]).GetHasMoved());
-        //Console.Write(((King)map[kingPos[0], kingPos[1]]).CheckMoveCas(kingPos, new int[]{kingPos[0], kingPos[1] + moveDist}, map));
-        //Console.Write(map[rookPos[0], rookPos[1]].CheckMove(rookPos, new int[]{kingPos[0], kingPos[1] - moveDist/2}, false, map));
-        //Console.WriteLine(
-            //map[kingPos[0], kingPos[1]] //&& !((King)map[kingPos[0], kingPos[1]]).GetHasMoved() //&&
-            //);
-
-        Console.Write( "[[" +(
-            map[kingPos[0], kingPos[1]] is King //&& !((King)map[kingPos[0], kingPos[1]]).GetHasMoved() //&&
-            //map[rookPos[0], rookPos[1]] is Rook && !((Rook)map[rookPos[0], rookPos[1]]).GetHasMoved() &&
-            //((King)map[kingPos[0], kingPos[1]]).CheckMoveCas(kingPos, new int[]{kingPos[0], kingPos[1] + moveDist}, map) &&
-            //map[rookPos[0], rookPos[1]].CheckMove(rookPos, new int[]{kingPos[0], kingPos[1] - moveDist/2}, false, map)
-            )+ "]]"
-        );
 
         if(
             map[kingPos[0], kingPos[1]] is King && !((King)map[kingPos[0], kingPos[1]]).GetHasMoved() &&
@@ -192,21 +176,16 @@ public class Board
             map[rookPos[0], rookPos[1]].CheckMove(rookPos, new int[]{kingPos[0], kingPos[1] + moveDist/2}, false, map)
         )
         {
-            Console.WriteLine("WERE IN");
             for(int i = 0; i<=2; i++)
             {
                 if(checkChecks(color))
                     isChecked = true;
 
                 this.kingPos[color][1] += moveDist*i/2;
-                Console.Write("WERE IN HERE" + isChecked);
             }
 
             if(!isChecked)
             {
-                Console.WriteLine("WE'RE EVEN HERE");
-                Console.WriteLine(kingPos[0]+" "+ kingPos[1] +" "+ moveDist);
-                map[kingPos[0], kingPos[1] + moveDist] = map[kingPos[0], kingPos[1]];
                 map[kingPos[0], kingPos[1] + moveDist/2] = map[rookPos[0], rookPos[1]];
                 map[kingPos[0], kingPos[1]] = null;
                 map[rookPos[0], rookPos[1]] = null;

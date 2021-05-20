@@ -7,10 +7,27 @@ public abstract class Piece
     protected int points;
     protected string shape;
 
+    public string GetName()
+    {
+        return name;
+    }
+    public string GetState()
+    {
+        return state;
+    }
+    public string GetColor()
+    {
+        return color;
+    }
+    public int GetPoints()
+    {
+        return points;
+    }
+
     public abstract bool CheckMove(int[] pos1, int[] pos2, bool capture, Piece[,] map);
+
     protected bool ClearPath(int[] pos1, int[]pos2, bool capture, Piece[,]map)
     {
-        Console.Write("WAPEE");
         int captureExtension = 1; //llegar hasta el final o quedarse uno antes
         if(capture)
             captureExtension = 2;
@@ -48,22 +65,7 @@ public abstract class Piece
         return clearPath;
     }
 
-    public string GetName()
-    {
-        return name;
-    }
-    public string GetState()
-    {
-        return state;
-    }
-    public string GetColor()
-    {
-        return color;
-    }
-    public int GetPoints()
-    {
-        return points;
-    }
+    
 
     public override string ToString()
     {

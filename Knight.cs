@@ -2,8 +2,6 @@ using System;
 
 public class Knight:Piece
 {
-    protected bool hasMoved = false;
-
     public Knight(string color)
     {
         this.color = color;

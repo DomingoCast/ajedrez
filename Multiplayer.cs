@@ -16,10 +16,14 @@ public class Multiplayer:Match
 
     override public void Start()
     {
-        StreamWriter fileW = new StreamWriter("games/" + fecha.ToString("yyyyMMdd-hhmmss") + "-f-" + nombre);
+        if(!Directory.Exists("./games/"))
+            Directory.CreateDirectory("./games/");
+
+        StreamWriter fileW = new StreamWriter("games/" + fecha.ToString("yyyyMMdd-hhmmss") + "-f-" + nombre+".txt");
         fileW.WriteLine(nombre);
         fileW.WriteLine(fecha);
         fileW.WriteLine(tipo);
+
 
         string turn = "white";
         bool error = false;

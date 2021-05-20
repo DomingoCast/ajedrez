@@ -48,10 +48,17 @@ public abstract class Match
                 capture = true;
             }
 
-            int[] pos1 = {Convert.ToInt32(move[0].Substring(1)) - 1, Convert.ToInt32(Convert.ToChar(move[0].Substring(0,1)) - 'a')};
-            int[] pos2 = {Convert.ToInt32(move[move.Length - 1].Substring(1)) - 1, Convert.ToInt32(Convert.ToChar(move[move.Length - 1].Substring(0,1)) - 'a')};
+            //try
+            //{
+                int[] pos1 = {Convert.ToInt32(move[0].Substring(1)) - 1, Convert.ToInt32(Convert.ToChar(move[0].Substring(0,1)) - 'a')};
+                int[] pos2 = {Convert.ToInt32(move[move.Length - 1].Substring(1)) - 1, Convert.ToInt32(Convert.ToChar(move[move.Length - 1].Substring(0,1)) - 'a')};
+                error = !board.Move(pos1, pos2, capture, turn);
+            //}
+            //catch
+            //{
+                //error = true;
+            //}
 
-            error = !board.Move(pos1, pos2, capture, turn);
         }
 
         if(!error)

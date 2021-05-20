@@ -15,6 +15,8 @@ public class Game
     private static string reviewMenu()
     {
         string[] array = Directory.GetFiles("./games", "*-f-*");
+        Array.Sort(array);
+        Array.Reverse(array);
         
         int pos = 0;
         ConsoleKeyInfo tecla;
@@ -28,11 +30,11 @@ public class Game
                 {
                     Console.BackgroundColor = ConsoleColor.White;
                     Console.ForegroundColor = ConsoleColor.Black;
-                    Console.WriteLine(array[i].Split("-f-")[1]);
+                    Console.WriteLine(array[i].Split("-f-")[1].Split(".txt")[0]);
                     Console.ResetColor();
                 }
                 else
-                    Console.WriteLine(array[i].Split("-f-")[1]);
+                    Console.WriteLine(array[i].Split("-f-")[1].Split(".txt")[0]);
             }
 
             tecla = Console.ReadKey();

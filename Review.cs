@@ -1,6 +1,5 @@
 using System;
 using System.IO;
-//using System.Collections.Generic;
 
 public class Review:Match
 {
@@ -23,7 +22,7 @@ public class Review:Match
 
             Console.SetCursorPosition(40, 15);
             Console.Write("Press for next move...");
-            ConsoleKeyInfo input = Console.ReadKey();
+            Console.ReadKey();
 
             string move = filas[i];
             handleMovement(move, ref error , ref turn);

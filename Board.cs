@@ -85,15 +85,11 @@ public class Board
             {
                 if(map[i, j] is Piece && map[i, j].GetColor() != color)
                 {
-                    Console.Write("["+ i +","+j+"] ");
-                    Console.Write(" x ");
                     if(check == false)
                         check = map[i, j].CheckMove(new int[2]{i, j}, kingPos[color], true, map);
-                    Console.WriteLine(check+ " ");
                 }
             }
         }
-        Console.WriteLine(check + " HEMOS VISTO");
 
         return check;
         
@@ -124,7 +120,6 @@ public class Board
                 // check if there are checks to your king, if illegal, restore the position
                 if(checkChecks(color))
                 {
-                    Console.Write("YOUVE BEEN CHECKED");
                     map[pos1[0], pos1[1]] = piece1;
                     map[pos2[0], pos2[1]] = piece2;
                     

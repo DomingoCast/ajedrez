@@ -12,7 +12,7 @@ public class Review:Match
     override public void Start()
     {
 
-        string[] filas= File.ReadAllLines(nombre);
+        string[] filas = File.ReadAllLines(nombre);
 
         string turn = "white";
         bool error = false;

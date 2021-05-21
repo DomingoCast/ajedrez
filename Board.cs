@@ -181,6 +181,7 @@ public class Board
 
             if(!isChecked)
             {
+                map[kingPos[0], kingPos[1] + moveDist] = map[kingPos[0], kingPos[1]];
                 map[kingPos[0], kingPos[1] + moveDist/2] = map[rookPos[0], rookPos[1]];
                 map[kingPos[0], kingPos[1]] = null;
                 map[rookPos[0], rookPos[1]] = null;

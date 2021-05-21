@@ -1,7 +1,13 @@
-public class Program
+﻿using System;
+
+namespace proyecto_final
 {
-    public static void Main()
+    class Program
     {
-        Game.Start();
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Hello World!");
+            Game.Start();
+        }
     }
 }

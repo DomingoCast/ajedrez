@@ -14,6 +14,9 @@ public class Game
 
     private static string reviewMenu()
     {
+        if(!Directory.Exists("./games/"))
+            Directory.CreateDirectory("./games/");
+
         string[] array = Directory.GetFiles("./games", "*-f-*");
         Array.Sort(array);
         Array.Reverse(array);
@@ -90,9 +93,17 @@ public class Game
                     break;
 
                 case "2":
-                    Review partidaRev = new Review(reviewMenu()); 
+                    try
+                    {
+                        Review partidaRev = new Review(reviewMenu()); 
+                        partidaRev.Start();
+                    }
+                    catch
+                    {
+                        Console.WriteLine("There are no games to review...");
+                        Console.ReadLine();
+                    }
                     Console.Clear();
-                    partidaRev.Start();
                     break;
                 case "e":
                 case "E":
